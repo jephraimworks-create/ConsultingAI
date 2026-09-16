@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mensana Opportunity Radar</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">M</span><div><strong>Mensana</strong><small>Opportunity Radar</small></div></div>
+    <nav>
+      <button class="nav active" data-view="NEW">⌁ <span>New opportunities</span></button>
+      <button class="nav" data-view="FOLLOW_UP">↻ <span>Follow-ups</span></button>
+      <button class="nav" data-view="HISTORY">◷ <span>History</span></button>
+      <button class="nav" data-panel="dataPanel">⇩ <span>Data & imports</span></button>
+      <button class="nav" data-panel="modelPanel">◇ <span>Model</span></button>
+    </nav>
+    <div class="local"><span class="pulse"></span><div><strong>Running locally</strong><small>No paid APIs</small></div></div>
+  </aside>
+  <main>
+    <header><div><p class="eyebrow">INTELLIGENCE WORKSPACE</p><h1>Opportunity radar</h1><p class="subtitle">Explainable signals, actionable contacts, and a feedback loop that learns.</p></div><button id="refresh" class="icon">↻</button></header>
+    <section id="stats" class="stats"></section>
+    <section class="toolbar">
+      <div class="tabs"><button class="country active" data-country="">All</button><button class="country" data-country="CA">Canada</button><button class="country" data-country="US">United States</button></div>
+      <input id="search" placeholder="Search companies or industries…"><label>Minimum score <input id="minScore" type="number" min="0" max="100" value="0"></label>
+    </section>
+    <section class="panel"><div class="panel-head"><div><h2 id="listTitle">New opportunities</h2><p id="listCount">Loading…</p></div><a class="button secondary" href="/api/export.csv">Export CSV</a></div><div id="companies" class="company-list"></div></section>
+  </main>
+
+  <dialog id="companyDialog"><button class="close" aria-label="Close">×</button><div id="companyDetail"></div></dialog>
+  <dialog id="dataPanel"><button class="close" aria-label="Close">×</button><h2>Data & imports</h2><p>Import your own Canada/U.S. list or retrieve selected U.S. issuer profiles from the SEC.</p><div class="import-card"><h3>CSV import</h3><p>Use the included <code>data/company-import-template.csv</code>. Duplicate companies are updated, not recreated.</p><input id="csvFile" type="file" accept=".csv"><button id="csvUpload" class="button">Import CSV</button></div><div class="import-card"><h3>SEC public data</h3><label>Your identifying email <input id="secIdentity" type="email" placeholder="name@company.com"></label><label>CIKs (comma-separated) <textarea id="secCiks" placeholder="0000320193, 0000789019"></textarea></label><button id="secImport" class="button">Import from SEC</button></div><pre id="importResult"></pre></dialog>
+  <dialog id="modelPanel"><button class="close" aria-label="Close">×</button><h2>Local feedback model</h2><div id="modelStatus"></div><p>The trainer only uses confirmed Yes/No outcomes. Unanswered calls and voicemails are excluded.</p><button id="trainModel" class="button">Retrain model</button><pre id="trainResult"></pre></dialog>
+  <div id="toast" role="status"></div>
+  <script src="/static/app.js"></script>
+</body></html>
