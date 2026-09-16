@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # These folders survive container rebuilds and remain visible on the host.
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - MENSANA_DB=/app/data/mensana.db
+      - MENSANA_MODEL=/app/models/opportunity_model.joblib
+    restart: unless-stopped
